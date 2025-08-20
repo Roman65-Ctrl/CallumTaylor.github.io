@@ -17,30 +17,61 @@
     </nav>
   </header>
 
-  <main>
-    <section class="section-content">
-      <h2>Welcome to my portfolio</h2>
-      <h3>Scroll to see some of my work</h3>
-      <p>Projects and experiments — all built from scratch.</p>
-    </section>
-
-    <section class="fade-section" id="projects">
-      <h2>Projects</h2>
-      <p>Here’s what I’ve been building lately...</p>
-    </section>
-
-    <section class="fade-section" id="about">
-      <h2>About Me</h2>
-      <p>HTML tinkerer, web builder, and problem solver.</p>
-    </section>
+  <main class="content">
+    <h2>Welcome to my portfolio</h2>
+    <h3>Scroll to see some of my work</h3>
+    <p>Projects and experiments — all built from scratch.</p>
   </main>
 
+  <section class="fade-section" id="projects">
+    <h2>Projects</h2>
+    <p>Here’s what I’ve been building lately...</p>
+  </section>
+
+  <section class="fade-section" id="about">
+    <h2>About Me</h2>
+    <p>HTML tinkerer, web builder, and problem solver.</p>
+  </section>
+
   <footer class="site-footer">
-    © 2025 Callum. All rights reserved.
+    "© 2025 Callum. All rights reserved."
   </footer>
 
-  <script src="fadeInSections.js" defer></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const sections = document.querySelectorAll('.fade-section');
+      if (!sections.length) return;
+
+      const reveal = el => el.classList.add('visible');
+
+      const revealVisibleSections = () => {
+        sections.forEach(section => {
+          const rect = section.getBoundingClientRect();
+          if (rect.top < window.innerHeight && rect.bottom > 0) {
+            reveal(section);
+          }
+        });
+      };
+
+      if (document.documentElement.scrollHeight <= window.innerHeight) {
+        revealVisibleSections();
+        return;
+      }
+
+      const observer = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            reveal(entry.target);
+            obs.unobserve(entry.target);
+          }
+        });
+      }, {
+        threshold: 0.15
+      });
+
+      sections.forEach(section => observer.observe(section));
+      revealVisibleSections();
+    });
+  </script>
 </body>
 </html>
-
-
