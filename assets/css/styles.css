@@ -95,3 +95,8 @@ body {
 main {
   flex: 1; /* pushes footer down */
 }
+
+.fade-section {
+  min-height: 100vh;
+}
+
