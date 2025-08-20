@@ -73,7 +73,6 @@ body {
     opacity 0.6s ease-out,
     transform 0.6s ease-out,
     visibility 0s linear 0.6s;
-  border: 1px solid red; /* for debugging */
 }
 
 .fade-section.visible,
