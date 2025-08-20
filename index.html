@@ -18,26 +18,43 @@
 
   <main class="content">
     <h2>Welcome to my portfolio</h2>
-    <h3>Scroll to see some of my work</h2>
+    <h3>Scroll to see some of my work</h3>
     <p>Projects and experiments — all built from scratch.</p>
   </main>
 
-  <section class="fade-section">
-  <h2>Projects</h2>
-  <p>Here’s what I’ve been building lately...</p>
-</section>
+  <section class="fade-section" id="projects">
+    <h2>Projects</h2>
+    <p>Here’s what I’ve been building lately...</p>
+  </section>
 
-<section class="fade-section">
-  <h2>About Me</h2>
-  <p>HTML tinkerer, web builder, and problem solver.</p>
-</section>
+  <section class="fade-section" id="about">
+    <h2>About Me</h2>
+    <p>HTML tinkerer, web builder, and problem solver.</p>
+  </section>
 
   <footer class="site-footer">
     <p>© 2025 Callum. All rights reserved.</p>
   </footer>
 
-  <script src="assets/js/main.js"></script>
-  
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const sections = document.querySelectorAll(".fade-section");
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      }, {
+        threshold: 0.1
+      });
+
+      sections.forEach((section) => {
+        observer.observe(section);
+      });
+    });
+  </script>
 </body>
 </html>
-
