@@ -37,24 +37,27 @@
   </footer>
 
   <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      const sections = document.querySelectorAll(".fade-section");
+  document.addEventListener("DOMContentLoaded", () => {
+    console.log("Script loaded and running.");
 
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("visible");
-            observer.unobserve(entry.target);
-          }
-        });
-      }, {
-        threshold: 0.1
-      });
+    const sections = document.querySelectorAll(".fade-section");
 
-      sections.forEach((section) => {
-        observer.observe(section);
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          console.log("Section revealed:", entry.target);
+          entry.target.classList.add("visible");
+          observer.unobserve(entry.target);
+        }
       });
+    }, {
+      threshold: 0.1
     });
-  </script>
+
+    sections.forEach((section) => {
+      observer.observe(section);
+    });
+  });
+</script>
 </body>
 </html>
