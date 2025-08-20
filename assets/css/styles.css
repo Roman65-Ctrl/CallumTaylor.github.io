@@ -1,6 +1,6 @@
 /* ===== Base Layout ===== */
-html, body {
-  height: 100%; /* Needed for sticky footer layout */
+html {
+  height: auto; /* allow page to grow naturally */
 }
 
 body {
@@ -9,7 +9,8 @@ body {
   background: #f8f9fa; /* neutral professional background */
   color: #222;
   display: flex;
-  flex-direction: column; /* Stack header → main → footer */
+  flex-direction: column;
+  min-height: 100vh; /* fills screen */
 }
 
 /* ===== Header & Footer ===== */
@@ -33,7 +34,7 @@ body {
 .site-footer {
   font-size: 0.9rem;
   color: #555;
-  margin-top: auto; /* Push footer to bottom if page is short */
+  margin-top: auto; /* naturally “sticks” at the bottom */
 }
 
 /* ===== Hero Animation ===== */
@@ -89,19 +90,7 @@ body {
   transition-delay: 0s; /* show immediately */
 }
 
-body {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh; /* fills screen */
-}
-
+/* ===== Main Content Wrapper ===== */
 main {
   flex: 1; /* pushes footer down */
 }
-
-.site-footer {
-  margin-top: auto; /* naturally “sticks” at the bottom */
-}
-
-
-
