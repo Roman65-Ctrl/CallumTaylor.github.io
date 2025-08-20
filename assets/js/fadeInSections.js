@@ -1,11 +1,12 @@
 document.addEventListener('DOMContentLoaded', () => {
   const sections = document.querySelectorAll('.fade-section');
-  if (!sections.length) return;
 
-  // Reveal helper
+  if (!sections.length) return; // nothing to do
+
+  // Helper: reveal element
   const reveal = el => el.classList.add('visible');
 
-  // Reveal any sections already in view
+  // Helper: check which sections are already visible
   const revealVisibleSections = () => {
     sections.forEach(section => {
       const rect = section.getBoundingClientRect();
@@ -15,7 +16,13 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   };
 
-  // Set up IntersectionObserver for scroll-triggered reveals
+  // If page isn't tall enough to scroll → reveal immediately
+  if (document.documentElement.scrollHeight <= window.innerHeight) {
+    revealVisibleSections();
+    return;
+  }
+
+  // Otherwise, observe scroll into view
   const observer = new IntersectionObserver((entries, obs) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -27,9 +34,9 @@ document.addEventListener('DOMContentLoaded', () => {
     threshold: 0.15
   });
 
-  // Observe all fade-section elements
   sections.forEach(section => observer.observe(section));
 
-  // Reveal anything already visible on load
+  // Safety check: reveal anything already in view on load
   revealVisibleSections();
 });
+

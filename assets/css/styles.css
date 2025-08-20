@@ -4,6 +4,7 @@ body {
   font-family: Arial, sans-serif;
   background: #f8f9fa; /* neutral professional background */
   color: #222;
+  min-height: 300vh;
 }
 
 /* ===== Header & Footer ===== */
@@ -75,7 +76,8 @@ body {
   border: 1px solid red; /* for debugging */
 }
 
-.fade-section.visible {
+.fade-section.visible,
+.fade-section.show {
   visibility: visible;
   opacity: 1;
   transform: translateY(0);
