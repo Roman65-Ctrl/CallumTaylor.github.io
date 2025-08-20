@@ -1,3 +1,5 @@
+console.log("Scroll animation script loaded.");
+
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
