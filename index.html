@@ -37,27 +37,31 @@
   </footer>
 
   <script>
-  document.addEventListener("DOMContentLoaded", () => {
-    console.log("Script loaded and running.");
+    document.addEventListener("DOMContentLoaded", () => {
+      console.log("Script loaded and waiting for first scroll.");
 
-    const sections = document.querySelectorAll(".fade-section");
+      const sections = document.querySelectorAll(".fade-section");
 
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          console.log("Section revealed:", entry.target);
-          entry.target.classList.add("visible");
-          observer.unobserve(entry.target);
-        }
-      });
-    }, {
-      threshold: 0.1
+      function startObserving() {
+        console.log("Scroll detected — starting observer.");
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              console.log("Section revealed:", entry.target);
+              entry.target.classList.add("visible");
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.1 });
+
+        sections.forEach((section) => observer.observe(section));
+        window.removeEventListener("scroll", startObserving);
+      }
+
+      // Wait for the first scroll before starting
+      window.addEventListener("scroll", startObserving, { once: true });
     });
-
-    sections.forEach((section) => {
-      observer.observe(section);
-    });
-  });
-</script>
+  </script>
 </body>
 </html>
+
