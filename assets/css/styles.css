@@ -89,4 +89,19 @@ body {
   transition-delay: 0s; /* show immediately */
 }
 
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* fills screen */
+}
+
+main {
+  flex: 1; /* pushes footer down */
+}
+
+.site-footer {
+  margin-top: auto; /* naturally “sticks” at the bottom */
+}
+
+
 
