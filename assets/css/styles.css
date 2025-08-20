@@ -1,10 +1,15 @@
 /* ===== Base Layout ===== */
+html, body {
+  height: 100%; /* Needed for sticky footer layout */
+}
+
 body {
   margin: 0;
   font-family: Arial, sans-serif;
   background: #f8f9fa; /* neutral professional background */
   color: #222;
-  min-height: 300vh;
+  display: flex;
+  flex-direction: column; /* Stack header → main → footer */
 }
 
 /* ===== Header & Footer ===== */
@@ -28,6 +33,7 @@ body {
 .site-footer {
   font-size: 0.9rem;
   color: #555;
+  margin-top: auto; /* Push footer to bottom if page is short */
 }
 
 /* ===== Hero Animation ===== */
@@ -76,11 +82,11 @@ body {
   border: 1px solid red; /* for debugging */
 }
 
-.fade-section.visible,
-.fade-section.show {
+.fade-section.visible {
   visibility: visible;
   opacity: 1;
   transform: translateY(0);
   transition-delay: 0s; /* show immediately */
 }
+
 
