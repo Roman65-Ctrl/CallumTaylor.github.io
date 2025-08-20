@@ -37,31 +37,49 @@
   </footer>
 
   <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      console.log("Script loaded and waiting for first scroll.");
+  document.addEventListener("DOMContentLoaded", () => {
+    console.log("Script loaded and waiting for first scroll.");
 
-      const sections = document.querySelectorAll(".fade-section");
+    const sections = document.querySelectorAll(".fade-section");
 
-      function startObserving() {
-        console.log("Scroll detected — starting observer.");
-        const observer = new IntersectionObserver((entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              console.log("Section revealed:", entry.target);
-              entry.target.classList.add("visible");
-              observer.unobserve(entry.target);
-            }
-          });
-        }, { threshold: 0.1 });
+    function revealVisibleSections() {
+      sections.forEach(section => {
+        const rect = section.getBoundingClientRect();
+        const inView = (
+          rect.top < window.innerHeight &&
+          rect.bottom > 0
+        );
+        if (inView) {
+          console.log("Section already in view:", section);
+          section.classList.add("visible");
+        }
+      });
+    }
 
-        sections.forEach((section) => observer.observe(section));
-        window.removeEventListener("scroll", startObserving);
-      }
+    function startObserving() {
+      console.log("Scroll detected — starting observer.");
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            console.log("Section revealed:", entry.target);
+            entry.target.classList.add("visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1 });
 
-      // Wait for the first scroll before starting
-      window.addEventListener("scroll", startObserving, { once: true });
-    });
-  </script>
+      sections.forEach((section) => observer.observe(section));
+
+      // Immediately reveal anything already in view
+      revealVisibleSections();
+
+      window.removeEventListener("scroll", startObserving);
+    }
+
+    // Wait for the first scroll before starting
+    window.addEventListener("scroll", startObserving, { once: true });
+  });
+</script>
 </body>
 </html>
 
