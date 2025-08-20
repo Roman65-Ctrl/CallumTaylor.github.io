@@ -51,13 +51,14 @@ body {
   }
 }
 
-/* ===== Content Section ===== */
-.content {
+/* ===== Section Content Styling ===== */
+.section-content {
   max-width: 800px;
   margin: 3rem auto;
   padding: 0 1rem;
   animation: fadeUp 0.8s ease-out forwards;
 }
+
 
 /* ===== General Animations ===== */
 @keyframes fadeUp {
